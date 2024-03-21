@@ -140,10 +140,7 @@ def add_food(request):
     context = {
         'form':form,
         }
-
-    context = {
-        'form':form,
-    }
+    
     return render(request, 'vendor/add_food.html', context)
 
 @login_required(login_url='login')
