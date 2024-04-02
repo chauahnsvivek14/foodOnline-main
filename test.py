@@ -2,11 +2,9 @@ import os
 import smtplib
 from email.message import EmailMessage
 
-
 #credentials
 email_user = 'prabhatidubey@outlook.com'
 email_pass = 'God@1110'
-
 contacts = ['vivekchauhan14@hotmail.com']
 sender = email_user
 to = contacts

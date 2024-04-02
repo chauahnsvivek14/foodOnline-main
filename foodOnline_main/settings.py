@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'accounts',
     'vendor',
     'menu',
@@ -29,6 +30,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'accounts.middleware.logging.LoggingMiddelware',
+    'accounts.middleware.is_ajax_middleware.AjaxMiddleware',
 ]
 
 ROOT_URLCONF = 'foodOnline_main.urls'
@@ -101,3 +105,35 @@ EMAIL_HOST_USER= config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL="foodOnline Marketplace <prabhatidubey@outlook.com>"
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+#email sample code
+# import os
+# import smtplib
+# from email.message import EmailMessage
+
+# #credentials
+# email_user = 'prabhatidubey@outlook.com'
+# email_pass = 'God@1110'
+# contacts = ['vivekchauhan14@hotmail.com']
+# sender = email_user
+# to = contacts
+
+# msg = EmailMessage()
+# msg['Subject'] = 'Subject...............E'
+# msg['From'] = sender
+# msg['To'] = ', '.join(contacts)
+# msg.set_content('YOUR EMAIL MESSAGE HERE')
+
+# try:
+#     with smtplib.SMTP('smtp-mail.outlook.com', 587) as smtp:
+#         smtp.starttls()
+#         smtp.login(email_user, email_pass)
+#         print("after login ........................")
+#         smtp.send_message(msg)
+# except Exception as e:
+#     print(e)
+
+
+
