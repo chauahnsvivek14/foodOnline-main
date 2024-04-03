@@ -74,7 +74,7 @@ const data = {
     generateBtn.addEventListener('click', fetchData);
     
     function fetchData() {
-      fetch('add_to_cart/food_id/')
+       fetch('add_to_cart/food_id/')
         .then(function (response) {
           if (response.status !== 200) {
             console.log(
@@ -91,3 +91,4 @@ const data = {
           console.log('Fetch Error :-S', err);
         });
     }
+
