@@ -26,69 +26,55 @@ function onPlaceChanged (){
 }
 
 
-// $(document).ready(function(){
-//     $('.add_to_cart').on('click', function(e){
-//         e.preventDefault();
+$(document).ready(function(){
+    // add to cart
+    $('.add_to_cart').on('click', function(e){
+        e.preventDefault();
         
-//         food_id = $(this).attr('data-id')
-//         url = $(this).attr('data-url');
-//         data = {
-//             food_id:food_id,
-//         }
+        food_id = $(this).attr('data-id')
+        url = $(this).attr('data-url');
+        data = {
+            food_id:food_id,
+        }
 
-//         $.ajax({
-//             type: 'GET',
-//             url: url,
-//             data: data,
-//             success: function(response){
-//                 console.log(response)
-//             }
-//         })
-//     })
-// });
-
-// Define the data we want to send
-const data = {
-                type: 'POST',
-                url: url,
-                data: data,
-                success: function(response){
-                    console.log(response)
-                }};
-  
-  // Send the POST request using fetch
-  fetch("add_to_cart/food_id", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-    .then((response) => response.json())
-    .then((data) => console.log("Success:", data))
-    .catch((error) => console.error("Error:", error));
-
-
-
-    var generateBtn = document.getElementById('generateSP');
-    generateBtn.addEventListener('click', fetchData);
-    
-    function fetchData() {
-       fetch('add_to_cart/food_id/')
-        .then(function (response) {
-          if (response.status !== 200) {
-            console.log(
-              'Looks like there was a problem. Status Code: ' + response.status
-            );
-            return;
-          }
-          response.json().then(function (data) {
-            console.log(data);
-            document.getElementById('w3review').value = data;
-          });
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: data,
+            success: function(response){
+                console.log(response)
+                $('#cart_counter').html(response.cart_counter['cart_count']);
+                $('#qty-'+food_id).html(response.qty);
+            }
         })
-        .catch(function (err) {
-          console.log('Fetch Error :-S', err);
-        });
-    }
+    })
 
+    // place the cart item quantity on the load
+    $('.item_qty').each(function(){
+      var the_id = $(this).attr('id')
+      var qty = $(this).attr('data-qty')
+      $('#'+the_id).html(qty)
+    })
+
+    // decrease cart
+    $('.decrease_cart').on('click', function(e){
+      e.preventDefault();
+      
+      food_id = $(this).attr('data-id')
+      url = $(this).attr('data-url');
+      data = {
+          food_id:food_id,
+      }
+
+      $.ajax({
+          type: 'GET',
+          url: url,
+          data: data,
+          success: function(response){
+              console.log(response)
+              $('#cart_counter').html(response.cart_counter['cart_count']);
+              $('#qty-'+food_id).html(response.qty);
+          }
+      })
+  })
+});

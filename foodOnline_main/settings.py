@@ -32,7 +32,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'accounts.middleware.logging.LoggingMiddelware',
-    'accounts.middleware.is_ajax_middleware.AjaxMiddleware',
 ]
 
 ROOT_URLCONF = 'foodOnline_main.urls'
