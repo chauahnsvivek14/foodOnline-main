@@ -59,8 +59,32 @@ def add_to_cart(request, food_id):
         else:
             return JsonResponse({'status':'Failed','message':'Invalid request'})
     else:
-        return JsonResponse({'status':'Failed','message':'Please login to continue'})
+        return JsonResponse({'status':'login_required','message':'Please login to continue'})
     
 
 def decrease_cart(request, food_id):
-    return JsonResponse({'status':'Failed','message':'Please login to continue'})
+    if request.user.is_authenticated:
+        if request:
+            # check if the food item exists
+            try:
+                fooditem = FoodItem.objects.get(id=food_id)
+                # check if the user has already added that food to the cart
+                try:
+                    chkCart = Cart.objects.get(user=request.user, fooditem=fooditem)
+                    if chkCart.quantity > 1:
+                        # decrease cart quantity
+                        chkCart.quantity -=1
+                        chkCart.save()
+                    else:
+                        chkCart.delete()
+                        chkCart.quantity = 0
+                    return JsonResponse({'status':'Success','cart_counter': get_cart_counter(request), 'qty': chkCart.quantity})
+                except:
+                    return JsonResponse({'status':'Failed','message':'You dont have this item in your cart!'})
+            except:
+                return JsonResponse({'status':'Failed','message':'This food item does not exist!'})
+        else:
+            return JsonResponse({'status':'Failed','message':'Invalid request'})
+    else:
+        return JsonResponse({'status':'login_required','message':'Please login to continue'})
+    
