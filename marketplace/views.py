@@ -61,7 +61,6 @@ def add_to_cart(request, food_id):
     else:
         return JsonResponse({'status':'login_required','message':'Please login to continue'})
     
-
 def decrease_cart(request, food_id):
     if request.user.is_authenticated:
         if request:
@@ -87,4 +86,24 @@ def decrease_cart(request, food_id):
             return JsonResponse({'status':'Failed','message':'Invalid request'})
     else:
         return JsonResponse({'status':'login_required','message':'Please login to continue'})
-    
+
+def cart(request):
+    cart_items = Cart.objects.filter(user=request.user)
+    context = {
+        'cart_items':cart_items
+    }
+    return render(request, 'marketplace/cart.html', context)    
+
+def delete_cart(request, cart_id):
+    if request.user.is_authenticated:
+        if request:
+            try:
+                # chack if the cart item exists
+                cart_item = Cart.objects.get(user=request.user, id=cart_id)
+                if cart_item:
+                    cart_item.delete()
+                    return JsonResponse({'status':'Success','message':'Cart item has been deleted', 'cart_counter':get_cart_counter(request)})
+            except:
+                return JsonResponse({'status':'Failed','message':'Cart item does not exist'})
+        else:
+            return JsonResponse({'status':'Failed','message':'Invalid request'})
