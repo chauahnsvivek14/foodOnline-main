@@ -52,6 +52,7 @@ TEMPLATES = [
                 'accounts.context_processors.get_vendor',
                 'marketplace.context_processors.get_cart_counter',
                 'marketplace.context_processors.get_cart_amounts',
+                'accounts.context_processors.get_google_api',
             ],
         },
     },
@@ -107,7 +108,8 @@ EMAIL_PORT= 587#config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER= config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL="foodOnline Marketplace <prabhatidubey@outlook.com>"
+DEFAULT_FROM_EMAIL='foodOnline Marketplace <prabhatidubey@outlook.com>'
+GOOGLE_API_KEY = 'AIzaSyC4y6cy-wR_bQ9y-By1vNE9vgSvtCTvLRU'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = False
