@@ -35,13 +35,16 @@
 													<span class="foodbakery-search-location-icon"><i class="icon-location"></i></span>
 													
 													<input type="text" class="location-field-text filter" id="id_address" required placeholder="All Locations">
+													
+													<input type="hidden" name="lat" value="">
+													<input type="hidden" name="lng" value="">
 												</div>
 											</li>
 										</ul>
 									</div>
 								</div>
 								<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-									<select name="radius" id="radius" style="height: 50px;">
+									<select name="radius" id="radius" style="height: 50px;" required>
 										<option value="" selected>Choole Radius</option>
 										<option value="5" >5km</option>
 										<option value="10" >10km</option>
